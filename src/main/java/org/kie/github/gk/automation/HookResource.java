@@ -71,6 +71,7 @@ public class HookResource {
         } catch ( IllegalArgumentException e ) {
             throw new BadRequestException( e );
         } catch ( Exception e ) {
+            //Small change PR!
             throw new InternalServerErrorException( Response
                                                             .status( Status.INTERNAL_SERVER_ERROR )
                                                             .entity( e.getMessage() ).build(), e );
