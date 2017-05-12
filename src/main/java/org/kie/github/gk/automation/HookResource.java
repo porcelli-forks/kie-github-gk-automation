@@ -2,6 +2,7 @@ package org.kie.github.gk.automation;
 
 import java.io.IOException;
 import java.io.InputStream;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.BadRequestException;
@@ -26,7 +27,8 @@ import org.slf4j.LoggerFactory;
 
 import static org.uberfire.commons.validation.PortablePreconditions.*;
 
-@Path("hook")
+@Path("/")
+@ApplicationScoped
 public class HookResource {
 
     private static final Logger LOG = LoggerFactory.getLogger( HookResource.class );
@@ -38,7 +40,7 @@ public class HookResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response onGitHubPost( @HeaderParam("HTTP_X_GITHUB_EVENT") final String event,
+    public Response onGitHubPost( @HeaderParam("X-GitHub-Event") final String event,
                                   @Context final HttpServletRequest request ) throws IOException {
 
         try {

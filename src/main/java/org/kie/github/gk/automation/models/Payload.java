@@ -24,6 +24,11 @@ public abstract class Payload {
 		/**
 		 * Any time a Commit is commented on.
 		 */
+		PING,
+
+		/**
+		 * Any time a Commit is commented on.
+		 */
 		COMMIT_COMMENT,
 		
 		/**
