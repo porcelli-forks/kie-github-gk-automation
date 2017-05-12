@@ -26,9 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import static org.uberfire.commons.validation.PortablePreconditions.*;
 
-@Path("/hook")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Path("hook")
 public class HookResource {
 
     private static final Logger LOG = LoggerFactory.getLogger( HookResource.class );
@@ -38,9 +36,10 @@ public class HookResource {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @POST
-    @Path("/")
-    public Response post( @HeaderParam("HTTP_X_GITHUB_EVENT") final String event,
-                          @Context final HttpServletRequest request ) throws IOException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response onGitHubPost( @HeaderParam("HTTP_X_GITHUB_EVENT") final String event,
+                                  @Context final HttpServletRequest request ) throws IOException {
 
         try {
             checkNotNull( "request", request );
