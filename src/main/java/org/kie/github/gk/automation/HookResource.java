@@ -26,14 +26,14 @@ import org.slf4j.LoggerFactory;
 
 import static org.uberfire.commons.validation.PortablePreconditions.*;
 
-@Path("/")
+@Path("/hook")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class HookResource {
 
     private static final Logger LOG = LoggerFactory.getLogger( HookResource.class );
 
-    @Inject //Resteasy doesn't seem to support constructor injection
+    @Inject //Resteasy doesn't seem to support con
     private GitHubHook hook;
     private ObjectMapper objectMapper = new ObjectMapper();
 
