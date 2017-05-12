@@ -33,13 +33,9 @@ public class HookResource {
 
     private static final Logger LOG = LoggerFactory.getLogger( HookResource.class );
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-    private final GitHubHook hook;
-
-    @Inject
-    public HookResource( final GitHubHook hook ) {
-        this.hook = hook;
-    }
+    @Inject //Resteasy doesn't seem to support constructor injection
+    private GitHubHook hook;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @POST
     @Path("/")
