@@ -33,13 +33,11 @@ public class HookResource {
 
     private static final Logger LOG = LoggerFactory.getLogger( HookResource.class );
 
-    private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private final GitHubHook hook;
 
     @Inject
-    public HookResource( final ObjectMapper objectMapper,
-                         final GitHubHook hook ) {
-        this.objectMapper = objectMapper;
+    public HookResource( final GitHubHook hook ) {
         this.hook = hook;
     }
 
@@ -50,12 +48,12 @@ public class HookResource {
 
         try {
             checkNotNull( "request", request );
-            checkNotNull( "request", event );
+            checkNotNull( "event", event );
         } catch ( final IllegalArgumentException e ) {
             throw new BadRequestException( e );
         }
 
-        try ( InputStream in = request.getInputStream() ) {
+        try ( final InputStream in = request.getInputStream() ) {
             Payload.EventType type = Payload.EventType.valueOf( event.toUpperCase() );
 
             switch ( type ) {
